@@ -1,0 +1,107 @@
+<!-- <!DOCTYPE HTML> -->
+<!-- <HTML LANG="EN"> -->
+<!-- <HEAD> -->
+    <!-- <META CHARSET="UTF-8"> -->
+    <!-- <TITLE>REGIST</TITLE> -->
+<!-- </HEAD> -->
+<!-- <BODY> -->
+    <!-- <DIV> -->
+        <!-- <LABEL FOR="USER">用户名</LABEL><INPUT TYPE="TEXT" ID="USER"> -->
+    <!-- </DIV> -->
+    <!-- <DIV> -->
+        <!-- <LABEL FOR="PASSWORD">密&NBSP;&NBSP;&NBSP;码</LABEL><INPUT TYPE="PASSWORD" ID="PASSWORD"> -->
+    <!-- </DIV> -->
+    <!-- <DIV> -->
+        <!-- <BUTTON ID="REGISTER">注册</BUTTON> -->
+    <!-- </DIV> -->
+<!-- </BODY> -->
+<!-- <SCRIPT SRC="HTTP://LIBS.BAIDU.COM/JQUERY/2.0.0/JQUERY.MIN.JS"></SCRIPT> -->
+<!-- <SCRIPT> -->
+    <!-- $(FUNCTION () { -->
+       <!-- $("#REGISTER").CLICK(FUNCTION () { -->
+           <!-- $.AJAX({ -->
+               <!-- URL:"HTTP://LOCALHOST:3000/REGISTER", -->
+               <!-- TYPE:"POST", -->
+               <!-- DATA:{ -->
+                    <!-- USERNAME:$("#USER").VAL(), -->
+                    <!-- PASSWORD:$("#PASSWORD").VAL() -->
+               <!-- }, -->
+               <!-- SUCCESS:FUNCTION (RES) { -->
+                   <!-- ALERT(RES); -->
+               <!-- }, -->
+               <!-- ERROR:FUNCTION (ERR) { -->
+                   <!-- CONSOLE.LOG(ERR); -->
+               <!-- } -->
+           <!-- }) -->
+       <!-- }) -->
+    <!-- }); -->
+<!-- </SCRIPT> -->
+<!-- </HTML> -->
+
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  
+ <body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  $(function () {
+    var socket = io("http://localhost:8888");
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+  });
+</script>    
+<SCRIPT>
+    $(FUNCTION () {
+       $("#REGISTER").CLICK(FUNCTION () {
+           $.AJAX({
+               URL:"HTTP://LOCALHOST:8888/REGISTER",
+               TYPE:"POST",
+               DATA:{
+                    USERNAME:$("#USER").VAL(),
+                    PASSWORD:$("#PASSWORD").VAL()
+               },
+               SUCCESS:FUNCTION (RES) {
+                   ALERT(RES);
+               },
+               ERROR:FUNCTION (ERR) {
+                   CONSOLE.LOG(ERR);
+               }
+           })
+       })
+    });
+</SCRIPT>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+	 <div>
+        <label for="user">用户名</label><input type="text" id="user">
+    </div>
+    <div>
+        <label for="password">密&nbsp;&nbsp;&nbsp;码</label><input type="password" id="password">
+    </div>
+    <div>
+        <button id="register">注册</button>
+    </div>
+  </body>
+</html>
